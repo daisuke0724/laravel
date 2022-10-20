@@ -43,8 +43,6 @@ init:
 	docker compose exec app chmod -R 777 storage bootstrap/cache
 	docker compose exec app npm install
 	docker compose exec app npm run build
-	docker compose cp app:/var/www/html/vendor/. .\src\vendor
-	docker compose cp app:/var/www/html/node_modules/. .\src\node_modules
 	@make fresh
 remake:
 	@make destroy
