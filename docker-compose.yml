@@ -1,10 +1,5 @@
 version: "3.9"
 volumes:
-# TODO: make create-projectsの時にエラーになるので回避方法を調査
-# TODO: ディレクトリがあるとcomposerが動かない
-# TODO: ダミーのディレクトリにプロジェクトファイルを生成後にコピーする方法なら回避できるかも
-# TODO: TMP配下が良さそう
-# TODO: make ファイルの整理が必要
   vendor-volume:
   node_modules-volume:
   psysh-volume:
@@ -15,11 +10,13 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
       target: ${APP_BUILD_TARGET:-development}
+      args:
+        - HTTP_PROXY=${HTTP_PROXY}
+        - HTTPS_PROXY=${HTTPS_PROXY}
     volumes:
       - type: bind
         source: ./src
         target: /var/www/html
-# TODO: make create-projectsの時にエラーになるので回避方法を調査
       - type: volume
         source: vendor-volume
         target: /var/www/html/vendor
