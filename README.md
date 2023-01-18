@@ -1,4 +1,4 @@
-# laravel-react
+# laravel
 
 ## Software Architecture
 - Application
